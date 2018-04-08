@@ -1,0 +1,308 @@
+"""
+Nombre:Alexis Andres Hernandez Ramirez
+Matricula: 1717110253
+Grupo: TIC 21
+Descripcion: Sokoban
+"""
+
+print "Mapa:"
+mapa = [[3,3,3,3,3,3,3],
+        [3,4,4,4,4,4,3],
+        [3,4,4,1,2,4,3],
+        [3,4,0,4,2,4,3],
+        [3,4,4,4,4,4,3],
+        [3,3,3,3,3,3,3]]
+def impresion_mapa(True):
+    for f in range(len(mapa)): #Utiliza la variable 'f' como contador para realizar el proceso segun el numero de elementos del conjunto 'mapa'.
+        y = " "
+        for c in range(len(mapa [f])): #Utiliza la variable 'c' como contador para realizar el proceso segun en nuumero de elementos del conjunto 'n' de mapa.
+            y = y + str(mapa [f][c]) #Agrega a 'y' el elemento [f][c] como cadena.
+        print y
+impresion_mapa(True) #Llama a la funcion antes definida para imprimir el mapa.
+print ""
+print "w = arriba" #Menu de movimientos posibles.
+print "s = abajo"
+print "a = izquierda"
+print "d = derecha"
+
+posicion = mapa [3][2] #Posicion inicial del personaje.
+fila = 3
+columna = 2
+while True:
+    move = raw_input("Indroduzca el movimiento: ")
+    if move == "d": #DERECHA
+        if mapa [fila][columna] == 0 and mapa [fila][columna + 1] == 4: # 1. comprueba si frente al personaje hay pasillo.
+            mapa [fila][columna +1] = 0 #Mueve al personaje.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje.
+            impresion_mapa(True)
+            columna = columna + 1 #Actualiza la posicion para el siguiente movimiento. 
+        elif mapa [fila][columna] == 0 and mapa [fila][columna + 1] == 1 and mapa[fila][columna + 2] == 4: # 2. Movimiento de caja.
+            mapa [fila][columna + 1] = 0 #Mueve al personaje hacia la DERECHA.
+            mapa [fila][columna + 2] = 1 #Mueve la caja hacia la DERECHA.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje
+            impresion_mapa(True)
+            columna = columna + 1 #Actualiza la posicion para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila][columna + 1] == 1 and mapa [fila][columna + 2] ==2: # 3. Mover DERECHA si hay caja (1) y si adelante de la caja hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila][columna + 1] = 0
+            mapa [fila][columna + 2] = 5
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 0 and mapa [fila][columna + 1] == 5 and mapa [fila][columna + 2] == 2: # 4. Mover caja/meta (5) DERECHA si adelante de la caja/meta hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila][columna + 1] = 6
+            mapa [fila][columna + 2] = 5
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna + 1] == 4: # 5. Mover personaje/meta (6) DERECHA si adelante hay pasillo (4).
+            mapa [fila][columna] = 2
+            mapa [fila][columna + 1] = 0
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 0 and mapa [fila][columna + 1] == 2: # 6. Mover DERECHA si hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila][columna + 1] = 6
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna + 1] == 5 and mapa [fila][columna + 2] == 4: # 7. Mover personaje/meta(6) DERECHA si enfrente hay caja/meta(5) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila][columna + 1] = 6
+            mapa [fila][columna + 2] = 1
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 0 and mapa [fila][columna + 1] == 5 and mapa [fila][columna + 2] == 4: # 8. Mover caja/meta(5) DERECHA si adelante hay pasillo(4).
+            mapa [fila][columna] = 4
+            mapa [fila][columna + 1] = 6
+            mapa [fila][columna + 2] = 1
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna + 1] == 5 and mapa [fila][columna + 2] == 2: # 9. Mover personaje/meta(6) DERECHA si enfrente hay caja/meta(5) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila][columna + 1] = 6
+            mapa [fila][columna + 2] = 5
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna + 1] == 2: # 10. Mover personaje/meta(6) DERECHA si adelante hay meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila][columna + 1] = 6
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna + 1] == 1 and mapa [fila][columna + 2] == 4: # 11. Mover personaje/meta(6) DERECHA si enfrente hay caja(1) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila][columna + 1] = 0
+            mapa [fila][columna + 2] = 1
+            impresion_mapa(True)
+            columna = columna + 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna + 1] == 1 and mapa [fila][columna + 2] == 2: # 12. Mover personaje/meta(6) DERECHA si enfrente hay caja(1) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila][columna + 1] = 0
+            mapa [fila][columna + 2] = 5
+            impresion_mapa(True)
+            columna = columna + 1
+    if move == "a": #IZQUIERDA
+        if mapa [fila][columna] == 0 and mapa [fila][columna - 1] == 4: # 1. comprueba si despues personaje hay pasillo.
+            mapa [fila][columna - 1] = 0 #Mueve al personaje.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje.
+            impresion_mapa(True)
+            columna = columna - 1 #Actualiza el valor de columna para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila][columna - 1] == 1 and mapa [fila][columna - 2] == 4: # 2. Movimiento de caja.
+            mapa [fila][columna - 1] = 0 #Mueve al personaje hacia la IZQUIERDA.
+            mapa [fila][columna - 2] = 1 #Mueve la caja hacia la IZQUIERDA.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje
+            impresion_mapa(True)
+            columna = columna - 1 #Actualiza la posicion para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila][columna - 1] == 1 and mapa [fila][columna - 2] ==2: # 3. Mover IZQUIERDA si hay caja (1) y si adelante de la caja hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila][columna - 1] = 0
+            mapa [fila][columna - 2] = 5
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 0 and mapa [fila][columna - 1] == 5 and mapa [fila][columna - 2] == 2: # 4. Mover caja/meta (5) IZQUIERDA si adelante de la caja/meta hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila][columna - 1] = 6
+            mapa [fila][columna - 2] = 5
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna - 1] == 4: # 5. Mover personaje/meta (6) IZQUIERDA si adelante hay pasillo (4).
+            mapa [fila][columna] = 2
+            mapa [fila][columna - 1] = 0
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 0 and mapa [fila][columna - 1] == 2: # 6. Mover IZQUIERDA si hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila][columna - 1] = 6
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna - 1] == 5 and mapa [fila][columna - 2] == 4: # 7. Mover personaje/meta(6) IZQUIERDA si enfrente hay caja/meta(5) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila][columna - 1] = 6
+            mapa [fila][columna - 2] = 1
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 0 and mapa [fila][columna - 1] == 5 and mapa [fila][columna - 2] == 4: # 8. Mover caja/meta(5) IZQUIERDA si adelante hay pasillo(4).
+            mapa [fila][columna] = 4
+            mapa [fila][columna - 1] = 6
+            mapa [fila][columna - 2] = 1
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna - 1] == 5 and mapa [fila][columna - 2] == 2: # 9. Mover personaje/meta(6) IZQUIERDA si enfrente hay caja/meta(5) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila][columna - 1] = 6
+            mapa [fila][columna - 2] = 5
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna - 1] == 2: # 10. Mover personaje/meta(6) IZQUIERDA si adelante hay meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila][columna - 1] = 6
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna - 1] == 1 and mapa [fila][columna - 2] == 4: # 11. Mover personaje/meta(6) IZQUIERDA si enfrente hay caja(1) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila][columna - 1] = 0
+            mapa [fila][columna - 2] = 1
+            impresion_mapa(True)
+            columna = columna - 1
+        elif mapa [fila][columna] == 6 and mapa [fila][columna - 1] == 1 and mapa [fila][columna - 2] == 2: # 12. Mover personaje/meta(6) IZQUIERDA si enfrente hay caja(1) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila][columna - 1] = 0
+            mapa [fila][columna - 2] = 5
+            impresion_mapa(True)
+            columna = columna - 1
+    if move == "s": #ABAJO
+        if mapa [fila][columna] == 0 and mapa [fila + 1][columna] == 4: # 1. comprueba si despues del personaje hay pasillo.
+            mapa [fila + 1][columna] = 0 #Mueve al personaje.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje.
+            impresion_mapa(True)
+            fila = fila + 1 #Actualiza el valor de columna para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila + 1][columna] == 1 and mapa [fila + 2][columna] == 4: # 2. Movimiento de caja.
+            mapa [fila + 1][columna] = 0 #Mueve al personaje hacia ABAJO.
+            mapa [fila + 2][columna] = 1 #Mueve la caja hacia la ABAJO.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje
+            impresion_mapa(True)
+            fila = fila + 1 #Actualiza la posicion para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila + 1][columna] == 1 and mapa [fila + 2][columna] ==2: # 3. Mover ABAJO si hay caja (1) y si adelante de la caja hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila + 1][columna] = 0
+            mapa [fila + 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 0 and mapa [fila + 1][columna] == 5 and mapa [fila + 2][columna] == 2: # 4. Mover caja/meta (5) ABAJO si adelante de la caja/meta hay meta (2).
+            mapa [fila][columna] = 4 
+            mapa [fila + 1][columna] = 6
+            mapa [fila + 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 6 and mapa [fila + 1][columna] == 4: # 5. Mover personaje/meta (6) ABAJO si adelante hay pasillo (4).
+            mapa [fila][columna] = 2
+            mapa [fila + 1][columna] = 0
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 0 and mapa [fila + 1][columna] == 2: # 6. Mover ABAJO si hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila + 1][columna] = 6
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 6 and mapa [fila + 1][columna] == 5 and mapa [fila + 2][columna] == 4: # 7. Mover personaje/meta(6) ABAJO si enfrente hay caja/meta(5) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila + 1][columna] = 6
+            mapa [fila + 2][columna] = 1
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 0 and mapa [fila + 1][columna] == 5 and mapa [fila + 2][columna] == 4: # 8. Mover caja/meta(5) ABAJO si adelante hay pasillo(4).
+            mapa [fila][columna] = 4
+            mapa [fila + 1][columna] = 6
+            mapa [fila + 2][columna] = 1
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 6 and mapa [fila + 1][columna] == 5 and mapa [fila + 2][columna] == 2: # 9. Mover personaje/meta(6) ABAJO si enfrente hay caja/meta(5) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila + 1][columna] = 6
+            mapa [fila + 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 6 and mapa [fila + 1][columna] == 2: # 10. Mover personaje/meta(6) ABAJO si adelante hay meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila + 1][columna] = 6
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 6 and mapa [fila + 1][columna] == 1 and mapa [fila + 2][columna] == 4: # 11. Mover personaje/meta(6) ABAJO si enfrente hay caja(1) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila + 1][columna] = 0
+            mapa [fila + 2][columna] = 1
+            impresion_mapa(True)
+            fila = fila + 1
+        elif mapa [fila][columna] == 6 and mapa [fila + 1][columna] == 1 and mapa [fila + 2][columna] == 2: # 12. Mover personaje/meta(6) ABAJO si enfrente hay caja(1) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila + 1][columna] = 0
+            mapa [fila + 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila + 1
+    if move == "w": #ARRIBA
+        if mapa [fila][columna] == 0 and mapa [fila - 1][columna] == 4: # 1. comprueba si despues del personaje hay pasillo.
+            mapa [fila - 1][columna] = 0 #Mueve al personaje.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje.
+            impresion_mapa(True)
+            fila = fila - 1 #Actualiza el valor de columna para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila - 1][columna] == 1 and mapa [fila - 2][columna] == 4: # 2. Movimiento de caja.
+            mapa [fila - 1][columna] = 0 #Mueve al personaje hacia ARRIBA.
+            mapa [fila - 2][columna] = 1 #Mueve la caja hacia la ARRIBA.
+            mapa [fila][columna] = 4 #Coloca pasillo en la posicion anterior del personaje
+            impresion_mapa(True)
+            fila = fila - 1 #Actualiza la posicion para el siguiente movimiento.
+        elif mapa [fila][columna] == 0 and mapa [fila - 1][columna] == 1 and mapa [fila - 2][columna] ==2: # 3. Mover ARRIBA si hay caja (1) y si adelante de la caja hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila - 1][columna] = 0
+            mapa [fila - 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 0 and mapa [fila - 1][columna] == 5 and mapa [fila - 2][columna] == 2: # 4. Mover caja/meta (5) ARRIBA si adelante de la caja/meta hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila - 1][columna] = 6
+            mapa [fila - 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 6 and mapa [fila - 1][columna] == 4: # 5. Mover personaje/meta (6) ARRIBA si adelante hay pasillo (4).
+            mapa [fila][columna] = 2
+            mapa [fila - 1][columna] = 0
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 0 and mapa [fila - 1][columna] == 2: # 6. Mover ARRIBA si hay meta (2).
+            mapa [fila][columna] = 4
+            mapa [fila - 1][columna] = 6
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 6 and mapa [fila - 1][columna] == 5 and mapa [fila - 2][columna] == 4: # 7. Mover personaje/meta(6) ARRIBA si enfrente hay caja/meta(5) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila - 1][columna] = 6
+            mapa [fila - 2][columna] = 1
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 0 and mapa [fila - 1][columna] == 5 and mapa [fila - 2][columna] == 4: # 8. Mover caja/meta(5) ARRIBA si adelante hay pasillo(4).
+            mapa [fila][columna] = 4
+            mapa [fila - 1][columna] = 6
+            mapa [fila - 2][columna] = 1
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 6 and mapa [fila - 1][columna] == 5 and mapa [fila - 2][columna] == 2: # 9. Mover personaje/meta(6) ARRIBA si enfrente hay caja/meta(5) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila - 1][columna] = 6
+            mapa [fila - 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 6 and mapa [fila - 1][columna] == 2: # 10. Mover personaje/meta(6) ARRIBA si adelante hay meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila - 1][columna] = 6
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 6 and mapa [fila - 1][columna] == 1 and mapa [fila - 2][columna] == 4: # 11. Mover personaje/meta(6) ARRIBA si enfrente hay caja(1) y despues pasillo(4).
+            mapa [fila][columna] = 2
+            mapa [fila - 1][columna] = 0
+            mapa [fila - 2][columna] = 1
+            impresion_mapa(True)
+            fila = fila - 1
+        elif mapa [fila][columna] == 6 and mapa [fila - 1][columna] == 1 and mapa [fila - 2][columna] == 2: # 12. Mover personaje/meta(6) ARRIBA si enfrente hay caja(1) y despues meta(2).
+            mapa [fila][columna] = 2
+            mapa [fila - 1][columna] = 0
+            mapa [fila - 2][columna] = 5
+            impresion_mapa(True)
+            fila = fila - 1
